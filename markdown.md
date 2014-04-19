@@ -46,5 +46,9 @@ Q：如果有netsted fence，该怎么处理？
 ### 表格
 使用`-|`构造表格。
 
+|name | job | salary|
+|----|----|----|
+|k | programmer | &infin;|
+
 ### bold　＆　italic
 `*`表示italic，`**`表示强调
