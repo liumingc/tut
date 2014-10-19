@@ -75,3 +75,26 @@ foo-bar()
 `
 把执行时的控制链，传给continuation。continuation在后面需要的时候，只要执行apply，就通过原来保存的   
 控制链返回到保存点了。
+
+
+其实在编译器中，最复杂的还是函数了。
+在3imp.pdf中，stack实现的VM，要比较env和stack的不同，考虑下面的例子：
+`
+(define (sum a b)
+  (define f (a)
+    (if (> a b)
+        0
+        (+ a (f (1+ a)))))
+  (f a))
+`
+f反复被调用，栈是在不断的变化中。但是，closure f中，访问的b的位置应该一直不变。
+stack VM的栈帧如下所示：
+---------------------
+env  +-------------- dynamic link,用于恢复env
+ret
+a2
+a1
+a0   +-------------- env
+env1 +-------------- static link，用于访问变量
+---------------------
+
