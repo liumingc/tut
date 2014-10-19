@@ -5,11 +5,16 @@
 如果把函数看成对象。。。
 那么它有哪些字段呢？
 `
-struct FuncObject {   
-	vars   
-	pc-link   
-	body   
-	...   
+struct FuncObject {
+
+	vars
+
+	pc-link
+
+	body
+
+	...
+
 }   
 `
 有访问链(vars)，控制链(pc-link)，以及函数体(body)   
@@ -19,13 +24,15 @@ struct FuncObject {
 对于C来说，一个变量要么是形参/局部变量，要么是全局变量。   
 * 控制链   
 当函数体执行完之后，下一步该做什么？其实函数中的返回地址构成了控制链。   
-example：   
+example：
+```
 `
 int add(int a, int b)   
 {   
 	return a + b;   
 }   
 `
+```
 这个函数中，   
 vars包括(a, b)   
 函数体为`return a + b;`   
@@ -89,6 +96,7 @@ foo-bar()
 `
 f反复被调用，栈是在不断的变化中。但是，closure f中，访问的b的位置应该一直不变。
 stack VM的栈帧如下所示：
+```
 ---------------------
 env  +-------------- dynamic link,用于恢复env
 ret
@@ -97,4 +105,4 @@ a1
 a0   +-------------- env
 env1 +-------------- static link，用于访问变量
 ---------------------
-
+```
